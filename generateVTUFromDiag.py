@@ -33,6 +33,8 @@ def generateVTUFromDiag(diag):
     persArray.SetName("Persistence")
     pairTypeArray = vtk.vtkIntArray()
     pairTypeArray.SetName("PairType")
+    pairIdentifierArray = vtk.vtkIntArray()
+    pairIdentifierArray.SetName("PairIdentifier")
     for i in range(len(diag)):
         pIDs = allPointsIDs[i]
         # Insert cell
@@ -45,6 +47,7 @@ def generateVTUFromDiag(diag):
         birthArray.InsertNextTuple1(diag[i][0])
         persArray.InsertNextTuple1(diag[i][1] - diag[i][0])
         pairTypeArray.InsertNextTuple1(0)
+        pairIdentifierArray.InsertNextTuple1(i)
     grid.GetCellData().AddArray(birthArray)
     grid.GetCellData().AddArray(persArray)
     grid.GetCellData().AddArray(pairTypeArray)
